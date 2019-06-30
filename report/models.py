@@ -1,13 +1,17 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Post(models.Model) :
 	title = models.CharField(max_length=100)
-	content = models.TextField()
+	content = models.TextField(blank=True)
 	date_posted = models.DateTimeField(auto_now_add=True, blank=True)
-	author = models.ForeignKey(User, on_delete=models.CASCADE)
+	author = models.ForeignKey( settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=False,blank=False)
+	mark = models.IntegerField(validators=[MinValueValidator(0),
+											MaxValueValidator(10)], null=True )
 	def __str__ (self) :
 		return self.title
 class Author (models.Model) :
