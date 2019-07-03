@@ -3,7 +3,7 @@ from . import models
 
 class PostSerializer(serializers.ModelSerializer) :
 	class Meta :
-		fields = ('id','title','content','author','mark')
+		fields = ('id','title','content','author')
 		model = models.Post
 	def validate_title(self,value):
 		if len(value) < 5 :
