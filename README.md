@@ -1,1 +1,1 @@
- Clone and type docker-compose up to run 
+- docker-compose up --build to run 
